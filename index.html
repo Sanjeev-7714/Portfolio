@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanjeev | Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        /* Profile image animation */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+            }
+
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+            }
+        }
+
+        .profile-img {
+            animation: pulse 2s infinite;
+        }
+
+        /* Navbar links hover animation */
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Fade in animation for sections */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Skill tags animation */
+        @keyframes skillPop {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .skill-tag {
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            animation: skillPop 0.5s ease;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        /* Project card hover animation */
+        .project-card {
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .project-card:hover {
+                transform: translateY(-5px) scale(1.01);
+            }
+            
+            .skill-tag {
+                font-size: 0.9rem;
+            }
+            
+            .about-text {
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .skill-tag {
+                font-size: 0.8rem;
+                padding: 0.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-r from-purple-600 via-indigo-500 to-blue-600 text-white">
+
+    <!-- Navbar -->
+    <nav class="p-4 md:p-6 flex justify-between items-center bg-gray-900 bg-opacity-80 fixed w-full top-0 z-10">
+        <h1 class="text-2xl md:text-3xl font-bold">Sanjeev</h1>
+        <ul class="hidden md:flex space-x-4 lg:space-x-6">
+            <li><a href="#about" class="nav-link hover:text-gray-300">About</a></li>
+            <li><a href="#education" class="nav-link hover:text-gray-300">Education</a></li>
+            <li><a href="#projects" class="nav-link hover:text-gray-300">Projects</a></li>
+            <li><a href="#skills" class="nav-link hover:text-gray-300">Skills</a></li>
+            <li><a href="#contact" class="nav-link hover:text-gray-300">Contact</a></li>
+            <li><a href="#certifications" class="nav-link hover:text-gray-300">Certifications</a></li>
+        </ul>
+        <button class="md:hidden text-white text-2xl" onclick="toggleMenu()">☰</button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-gray-900 text-center p-4 absolute top-14 w-full z-20">
+        <ul>
+            <li><a href="#about" class="block py-2" onclick="closeMenu()">About</a></li>
+            <li><a href="#education" class="block py-2" onclick="closeMenu()">Education</a></li>
+            <li><a href="#projects" class="block py-2" onclick="closeMenu()">Projects</a></li>
+            <li><a href="#skills" class="block py-2" onclick="closeMenu()">Skills</a></li>
+            <li><a href="#contact" class="block py-2" onclick="closeMenu()">Contact</a></li>
+            <li><a href="#certifications" class="block py-2" onclick="closeMenu()">Certifications</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="text-center pt-24 md:pt-32 pb-16 md:pb-20 px-4">
+        <img src="./images/Profile-01.JPG" alt="Sanjeev"
+            class="profile-img w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 mx-auto rounded-full border-4 border-white shadow-lg">
+        <h2 class="hero-title text-3xl sm:text-4xl md:text-5xl font-bold mt-4" data-aos="fade-up" data-aos-delay="300">Hi, I'm Sanjeev</h2>
+        <p class="mt-4 text-base sm:text-lg md:text-xl" data-aos="fade-up" data-aos-delay="500">Engineering Professional
+            &nbsp;|&nbsp;
+            Web Development Enthusiast</p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="fade-in p-6 sm:p-8 md:p-10 text-center bg-gray-900 rounded-lg shadow-xl max-w-5xl mx-auto mb-10 md:mb-16 mx-4 sm:mx-8 md:mx-auto">
+        <h2 class="section-title text-2xl sm:text-3xl font-bold">About Me</h2>
+        <p class="about-text mt-5 text-sm sm:text-base">Hi, I'm Sanjeev, a passionate Full-Stack Web Developer with a strong foundation in the MERN
+            stack. I love transforming ideas into visually stunning and functional web applications. From sleek
+            front-end designs to efficient back-end solutions, I thrive on crafting seamless digital experiences.
+
+            I recently built projects like a Udemy clone and a TripAdvisor clone, showcasing my ability to develop
+            user-friendly platforms with real-world functionality. I also designed Greenden, an e-commerce website for
+            selling plants, using HTML and Tailwind CSS.
+
+            I'm always eager to learn, experiment, and grow in the world of web development. Whether it's mastering the
+            latest frameworks or optimizing performance, I strive to write clean, efficient, and scalable code.</p>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="fade-in p-6 sm:p-8 md:p-10 text-center bg-gray-800 rounded-lg shadow-xl max-w-5xl mx-auto mb-10 md:mb-16 mx-4 sm:mx-8 md:mx-auto">
+        <h2 class="section-title text-2xl sm:text-3xl font-bold">Education</h2>
+        <div class="mt-6 text-left text-sm sm:text-base">
+            <p class="text-base sm:text-lg" data-aos="fade-right" data-aos-delay="100"><strong>Bachelor of Engineering (ECE)</strong>
+            </p>
+            <p class="mt-2 sm:mt-4" data-aos="fade-right" data-aos-delay="200">Rajalakshmi Engineering College, Thandalam,
+                Chennai-602105</p>
+            <br>
+            <p class="text-base sm:text-lg" data-aos="fade-right" data-aos-delay="300"><strong>HSC</strong></p>
+            <p class="mt-2 sm:mt-4" data-aos="fade-right" data-aos-delay="400">Vijayantha Model Higher Secondary School,
+                Chennai-600054</p>
+            <p class="mt-2 sm:mt-3" data-aos="fade-right" data-aos-delay="500"> Marks Obtained : <span
+                    class="text-yellow-400">498.85/600 (83.14%)</span></p>
+            <br>
+            <p class="text-base sm:text-lg" data-aos="fade-right" data-aos-delay="600"><strong>SSC</strong></p>
+            <p class="mt-2 sm:mt-4" data-aos="fade-right" data-aos-delay="700">Kendriya Vidyalaya HVF, Avadi, Chennai-600054</p>
+            <p class="mt-2 sm:mt-3" data-aos="fade-right" data-aos-delay="800"> Marks Obtained : <span
+                    class="text-yellow-400">393/500 (78.6%) </span></p>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="fade-in p-6 sm:p-8 md:p-10 text-center bg-gray-900 rounded-lg shadow-xl max-w-5xl mx-auto mb-10 md:mb-16 mx-4 sm:mx-8 md:mx-auto">
+        <h2 class="section-title text-2xl sm:text-3xl font-bold">Projects</h2>
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+
+            <!-- Greenden Project Card -->
+            <a href="https://sanjeev-7714.github.io/Greenden-Tailwind-CSS/" target="_blank" class="block focus:outline-none">
+                <div class="project-card bg-white text-black p-4 sm:p-6 rounded-lg shadow-lg overflow-hidden">
+                    <!-- Thumbnail Image -->
+                    <div class="h-36 sm:h-40 md:h-48 bg-gray-200 rounded-lg mb-3 sm:mb-4 overflow-hidden">
+                        <img src="./images/Greenden.png" alt="Greenden Thumbnail" class="w-full h-full object-cover">
+                    </div>
+                    <!-- Title -->
+                    <h3 class="text-xl sm:text-2xl font-semibold">Greenden</h3>
+                    <!-- Tags -->
+                    <div class="flex flex-wrap gap-1 sm:gap-2 mt-2 sm:mt-3 mb-3 sm:mb-4">
+                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">HTML</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Tailwind CSS</span>
+                        <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">E-commerce</span>
+                    </div>
+                    <!-- Description -->
+                    <p class="text-left mt-2 text-sm sm:text-base">Greenden is a plant-selling website built using HTML and Tailwind
+                        CSS. It features a Home, Products, and Contact page, providing a clean and responsive design for
+                        an easy shopping
+                        experience.🌿</p>
+                </div>
+            </a>
+
+            <!-- Udemy Clone Project Card -->
+            <a href="https://sanjeev-7714.github.io/Udemy-Clone/" target="_blank" class="block focus:outline-none">
+                <div class="project-card bg-white text-black p-4 sm:p-6 rounded-lg shadow-lg overflow-hidden">
+                    <!-- Thumbnail Image -->
+                    <div class="h-36 sm:h-40 md:h-48 bg-gray-200 rounded-lg mb-3 sm:mb-4 overflow-hidden">
+                        <img src="./images/Udemy.png" alt="Udemy Clone Thumbnail"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <!-- Title -->
+                    <h3 class="text-xl sm:text-2xl font-semibold">Udemy Clone</h3>
+                    <!-- Tags -->
+                    <div class="flex flex-wrap gap-1 sm:gap-2 mt-2 sm:mt-3 mb-3 sm:mb-4">
+                        <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">HTML</span>
+                        <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded-full">CSS</span>
+                        <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">Education</span>
+                    </div>
+                    <!-- Description -->
+                    <p class="text-left mt-2 text-sm sm:text-base">Built a responsive Udemy clone using HTML & CSS, replicating key
+                        features like course listings, category filters, and a modern UI. This project showcases my
+                        front-end development skills.📚</p>
+                </div>
+            </a>
+
+            <!-- TripAdvisor Clone Project Card -->
+            <a href="https://sanjeev-7714.github.io/Tripadvisor-Clone/" target="_blank" class="block focus:outline-none">
+                <div class="project-card bg-white text-black p-4 sm:p-6 rounded-lg shadow-lg overflow-hidden">
+                    <!-- Thumbnail Image -->
+                    <div class="h-36 sm:h-40 md:h-48 bg-gray-200 rounded-lg mb-3 sm:mb-4 overflow-hidden">
+                        <img src="./images/Tripadvisor.png" alt="TripAdvisor Clone Thumbnail"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <!-- Title -->
+                    <h3 class="text-xl sm:text-2xl font-semibold">TripAdvisor Clone</h3>
+                    <!-- Tags -->
+                    <div class="flex flex-wrap gap-1 sm:gap-2 mt-2 sm:mt-3 mb-3 sm:mb-4">
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">HTML</span>
+                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">CSS</span>
+                        <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">Travel</span>
+                    </div>
+                    <!-- Description -->
+                    <p class="text-left mt-2 text-sm sm:text-base">Built a Tripadvisor clone replicating the design and layout of the popular
+                        travel website. Features dynamic search, user authentication, and an intuitive UI for seamless
+                        navigation.🌍</p>
+                </div>
+            </a>
+
+            <!-- PAC-MAN Game Project Card -->
+            <div class="project-card bg-white text-black p-4 sm:p-6 rounded-lg shadow-lg overflow-hidden">
+                <!-- Thumbnail Image -->
+                <div class="h-36 sm:h-40 md:h-48 bg-gray-200 rounded-lg mb-3 sm:mb-4 overflow-hidden">
+                    <img src="./images/Pac-Man.jpg" alt="PAC-MAN Game Thumbnail" class="w-full h-full object-cover">
+                </div>
+                <!-- Title -->
+                <h3 class="text-xl sm:text-2xl font-semibold">PAC-MAN Game</h3>
+                <!-- Tags -->
+                <div class="flex flex-wrap gap-1 sm:gap-2 mt-2 sm:mt-3 mb-3 sm:mb-4">
+                    <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">Python</span>
+                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Pygame</span>
+                    <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">Game Dev</span>
+                </div>
+                <!-- Description -->
+                <p class="text-left mt-2 text-sm sm:text-base">🚀 Pac-Man Game is a classic arcade game recreation built using Python and
+                    Pygame. It features smooth player controls, ghost AI, scoring mechanics, and a responsive game
+                    environment.</p>
+            </div>
+
+            <!-- Obstacle Avoiding Robot Project Card -->
+            <div class="project-card bg-white text-black p-4 sm:p-6 rounded-lg shadow-lg overflow-hidden">
+                <!-- Thumbnail Image -->
+                <div class="h-36 sm:h-40 md:h-48 bg-gray-200 rounded-lg mb-3 sm:mb-4 overflow-hidden">
+                    <img src="./images/Robot.png" alt="Obstacle Avoiding Robot Thumbnail"
+                        class="w-full h-full object-cover">
+                </div>
+                <!-- Title -->
+                <h3 class="text-xl sm:text-2xl font-semibold">Obstacle Avoiding Robot</h3>
+                <!-- Tags -->
+                <div class="flex flex-wrap gap-1 sm:gap-2 mt-2 sm:mt-3 mb-3 sm:mb-4">
+                    <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">Arduino</span>
+                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Robotics</span>
+                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Sensors</span>
+                </div>
+                <!-- Description -->
+                <p class="text-left mt-2 text-sm sm:text-base">An autonomous robot built using Arduino that navigates its environment
+                    by detecting and avoiding obstacles. It utilizes ultrasonic sensors and servo motors to adjust its
+                    path accordingly.🤖</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="fade-in p-6 sm:p-8 md:p-10 text-center bg-gray-800 rounded-lg shadow-xl max-w-5xl mx-auto mb-10 md:mb-16 mx-4 sm:mx-8 md:mx-auto">
+        <h2 class="section-title text-2xl sm:text-3xl font-bold mb-6 md:mb-10">Skills</h2>
+        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 text-base sm:text-lg cursor-pointer">
+            <span class="skill-tag p-2 rounded-lg">HTML & CSS</span>
+            <span class="skill-tag p-2 rounded-lg">Full Stack Development</span>
+            <span class="skill-tag p-2 rounded-lg">JavaScript</span>
+            <span class="skill-tag p-2 rounded-lg">Video Editing</span>
+            <span class="skill-tag p-2 rounded-lg">Poster Designing</span>
+            <span class="skill-tag p-2 rounded-lg">Leadership & Teamwork</span>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications"
+        class="fade-in p-6 sm:p-8 md:p-10 text-left bg-gray-900 rounded-lg shadow-xl max-w-5xl mx-auto mb-10 md:mb-16 mx-4 sm:mx-8 md:mx-auto">
+        <h2 class="section-title text-2xl sm:text-3xl font-bold ml-0 sm:ml-6">Certifications</h2>
+        <div class="mt-6 md:mt-10 text-base sm:text-lg text-left">
+            <li class="mb-3 sm:mb-4" data-aos="fade-up" data-aos-delay="100">Certified in Full Stack Web Development by
+                InternEzy</li>
+            <li data-aos="fade-up" data-aos-delay="200">Completed Certified Internship in Heavy Vehicles Factory, Avadi,
+                Chennai-600054</li>
+        </div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="fade-in p-6 sm:p-8 md:p-10 text-center bg-gray-900 rounded-lg shadow-xl max-w-5xl mx-auto mb-10 md:mb-16 mx-4 sm:mx-8 md:mx-auto">
+        <h2 class="section-title text-2xl sm:text-3xl font-bold">Contact</h2>
+        <p class="mt-4 text-sm sm:text-base" data-aos="zoom-in" data-aos-delay="100">📧 Email: &nbsp;
+            <a class="font-semibold break-all" href="https://mail.google.com/" target="_blank">sanjeev.dev7714@gmail.com</a>
+        </p>
+
+        <div class="flex justify-center space-x-6 sm:space-x-8 mt-6">
+            <a href="https://www.linkedin.com/in/sanjeev-dev7714/" target="_blank"
+                class="text-2xl sm:text-3xl hover:text-blue-400 transition-colors duration-300" data-aos="zoom-in"
+                data-aos-delay="200">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/Sanjeev-7714" target="_blank"
+                class="text-2xl sm:text-3xl hover:text-gray-400 transition-colors duration-300" data-aos="zoom-in"
+                data-aos-delay="300">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.instagram.com/ll_.sanjeev_.ll?igsh=bjcweHBwYW43ZWtn&utm_source=qr" target="_blank"
+                class="text-2xl sm:text-3xl hover:text-pink-500 transition-colors duration-300" data-aos="zoom-in"
+                data-aos-delay="400">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="p-4 sm:p-6 text-center bg-gray-900 text-sm sm:text-base">
+        <p>&copy; 2025 Sanjeev. All rights reserved.</p>
+    </footer>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: false,
+            // Disable animations on small screens
+            disable: window.innerWidth < 480
+        });
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            document.getElementById("mobileMenu").classList.toggle("hidden");
+        }
+        
+        // Close mobile menu after clicking a link
+        function closeMenu() {
+            document.getElementById("mobileMenu").classList.add("hidden");
+        }
+
+        // Close mobile menu on window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 768) {
+                document.getElementById("mobileMenu").classList.add("hidden");
+            }
+        });
+
+        // Scroll reveal animation
+        document.addEventListener('DOMContentLoaded', function () {
+            const sections = document.querySelectorAll('.fade-in');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+
+</html>
