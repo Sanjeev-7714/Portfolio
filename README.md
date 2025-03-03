@@ -62,5 +62,3 @@ The website is designed to be fully responsive across various devices:
 - LinkedIn: [linkedin.com/in/sanjeev-dev7714](https://www.linkedin.com/in/sanjeev-dev7714/)
 - GitHub: [github.com/Sanjeev-7714](https://github.com/Sanjeev-7714)
 - Instagram: [@ll_.sanjeev_.ll](https://www.instagram.com/ll_.sanjeev_.ll)
-
-© 2025 Sanjeev. All rights reserved.
